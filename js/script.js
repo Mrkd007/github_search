@@ -65,7 +65,7 @@ function getUserRepos(userName) {
 function createCard(data) {
     $('.show-up-image').css('transform','translateY(-60vh)');
     $('.repo-list-container').css({'transform':'translateY(0vh)','visibility':'visible'});
-    console.log(data);
+    // console.log(data);
     var cardString = '';
     for(key in data) {
         // console.log(data[key]);
