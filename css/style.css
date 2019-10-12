@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .navbar_section {
@@ -27,6 +28,7 @@ html, body {
     background-size: cover;
     top: 0;
     z-index: -1;
+    transition: ease-in-out .4s all;
 }
 
 .main_search-container {
@@ -38,18 +40,35 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: ease-in-out .4s all;
+}
+
+.main_search-container--has-data {
+    padding: 30px;
+    height: 40vh;
+    margin-top: -50px;
 }
 
 .main_search__input-field {
     border: none;
     border-bottom: 2px solid #ffffff;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     z-index: 1;
     background: transparent;
     padding: 10px 50px 10px 10px;
     font-size: 42px;
     outline: none;
     color: #ffffff;
+    transition: ease-in-out .4s all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main_search-container--has-data .main_search__input-field {
+    width: 100%;
+    max-width: 300px;
+    font-size: 24px;
 }
 
 .main_search__input-field::-webkit-input-placeholder { /* Edge */
@@ -66,8 +85,80 @@ html, body {
 
 .main_search__input-icon {
     color: #ffffff;
-    margin-left: -55px;
-    margin-top: -5px;
+    margin-left: -45px;
     font-size: 42px;
+    cursor: pointer;
+    z-index: 1;
+    width: 45px;
+    transition: ease-in-out .4s all;
+}
 
+.main_search-container--has-data .main_search__input-icon {
+    font-size: 30px;
+    margin-left: -30px;
+    width: 30px;
+}
+
+.dropdown_list {
+    position: absolute;
+    height: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 20px 0px #999;
+    overflow: hidden;
+}
+
+.dropdown_list__list {
+    margin: 0;
+    list-style: none;
+    background-color: #ededed;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 999;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown_list__list--item {
+    width: calc(100% - 30px);
+    padding: 10px 15px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333333;
+}
+
+.dropdown_list__list--item:hover {
+    background-color: #ffffff;
+    color: #777777;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.repo-list-container {
+    width: 120%;
+    margin-left: -10%;
+    height: 60vh;
+    visibility: hidden;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0px -70px 60px #fff;
+    transition: ease-in-out .4s height,ease-in-out .4s visibility;
+}
+
+.repo-list-card-conatiner {
+    width: 100vw;
+    margin-left: 8.3%;
+    overflow-y: auto;
+    max-height: 60vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding: 50px 15px 50px 15px;
+}
+
+.repo-list-card {
+    width: 320px;
+    display: inline-block;
+    margin: 0 20px;
 }
