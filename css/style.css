@@ -235,3 +235,49 @@ html, body {
     padding: 5px 10px 5px 10px;
     cursor: default;
 }
+
+.error_message-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    background: #eeeeeee0;
+    cursor: progress;
+    display: none;
+}
+
+.err_message {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: progress;
+}
+
+.close_err-message {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    margin-right: 10px;
+    float: right;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.err_message--close {
+    line-height: 30px;
+}

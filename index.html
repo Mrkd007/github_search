@@ -17,11 +17,18 @@
         <div class="show-up-image"></div>
         <div class="main_search-container">
             <input type="text" class="main_search__input-field" id="main_search" placeholder="Search your github">
-            <i class="material-icons main_search__input-icon">search</i>
+            <i class="material-icons main_search__input-icon" onclick="checkValidUser()">search</i>
         </div>
         <div class="repo-list-container">
             <div class="repo-list-card-conatiner">
             </div>
+        </div>
+
+        <div class="error_message-container">
+            <span class="close_err-message" onclick="hideError()"><i class="material-icons err_message--close">clear</i></span>
+            <span class="err_message">
+                Please wait for sometime since data loading...
+            </span>
         </div>
         
         <div class="dropdown_list">

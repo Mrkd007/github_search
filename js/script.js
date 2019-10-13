@@ -1,4 +1,5 @@
-var value;
+var value,serachedUserList = [];
+$('.error_message-container').fadeOut();
 
 $("#main_search").on('input',function(){
     $('.repo-list-container').css({'transform':'translateY(60vh)','visibility':'hidden'});
@@ -21,8 +22,30 @@ $("#main_search").on('input',function(){
         success: function(data) {
             createDropDown(inputElement,data);
         },
+    }).fail(function (jqXHR, textStatus, error) {
+        // Handle error here
+        var errMessage = JSON.parse(jqXHR.responseText).message + '<br><br> Please refresh the page to continue';
+        $('.err_message').html(errMessage);
+        $('.error_message-container').fadeIn();
     });
 });
+
+$("#main_search").on("keypress", function(e) {
+    if (e.keyCode == 13) {
+        checkValidUser();
+    }
+});
+
+function checkValidUser() {
+    value = $('#main_search').val();
+    if(serachedUserList.indexOf(value) != -1) {
+        getUserRepos(value);
+    } else {
+        var errMessage = 'Please enter a valid github username(case sensitive) or choose from the dropdown';
+        $('.err_message').html(errMessage);
+        $('.error_message-container').fadeIn();
+    }
+}
 
 function createDropDown(inputElement,data) {
     $('.repo-list-container').css({'transform':'translateY(60vh)','visibility':'hidden'});
@@ -35,7 +58,9 @@ function createDropDown(inputElement,data) {
     }
     
     var listString = '';
+    serachedUserList = [];
     for(key in data.items) {
+        serachedUserList.push(data.items[key].login);
         listString += `<li class="dropdown_list__list--item" onclick="getUserRepos('${data.items[key].login}')">${data.items[key].login}</li>`;
     }
     setTimeout(function() {
@@ -122,4 +147,10 @@ function copy(element_id) {
     document.execCommand("copy");
     document.body.removeChild(aux);
     alert('url copied');
+}
+
+function hideError() {
+    $('#main_search').val('');
+    $('.error_message-container').fadeOut();
+    inputHasNoData();
 }
