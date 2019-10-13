@@ -96,7 +96,7 @@ function createCard(data) {
         // console.log(data[key]);
         cardString += `
         <div class="repo-list-card">
-            <span class="title">${data[key].name}</span>
+            <span class="title" title="${data[key].name}">${data[key].name}</span>
             <span class="clone-repo-wrapper">
                 <span class="clone-repo" id=clone_repo_${key}>${data[key].clone_url}</span>
                 <i class="material-icons card-copy-icon" title="Click here to copy the clone URL" onclick="copy('clone_repo_${key}')">file_copy</i>
