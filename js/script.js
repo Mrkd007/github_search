@@ -1,33 +1,39 @@
 var value,serachedUserList = [];
 $('.error_message-container').fadeOut();
 
+var waitTimeForInput;
+
 $("#main_search").on('input',function(){
-    $('.repo-list-container').css({'transform':'translateY(60vh)','visibility':'hidden'});
-    $('.show-up-image').css('transform','translateY(0)');
-    value = $('#main_search').val();
-    if(value == '') {
-        inputHasNoData();
-        return;
-    } else {
-        inputHasData();
-    }    
-    // createDropDown(getUsersList('https://api.github.com/users/'+value));
-    var userListURL = 'https://api.github.com/search/users?q='+value;
-    // console.log('getUsersList(tempURL)',getUsersList(tempURL));
-    // createDropDown(getUsersList(tempURL));
-    var inputElement = '.main_search__input-field';
-    $.ajax({
-        type: 'GET',
-        url: userListURL,
-        success: function(data) {
-            createDropDown(inputElement,data);
-        },
-    }).fail(function (jqXHR, textStatus, error) {
-        // Handle error here
-        var errMessage = JSON.parse(jqXHR.responseText).message + '<br><br> Please refresh the page to continue';
-        $('.err_message').html(errMessage);
-        $('.error_message-container').fadeIn();
-    });
+    var timeOutFlag = false;
+    clearInterval(waitTimeForInput);
+    waitTimeForInput = setTimeout(function(){  
+        $('.repo-list-container').css({'transform':'translateY(60vh)','visibility':'hidden'});
+        $('.show-up-image').css('transform','translateY(0)');
+        value = $('#main_search').val();
+        if(value == '') {
+            inputHasNoData();
+            return;
+        } else {
+            inputHasData();
+        }    
+        // createDropDown(getUsersList('https://api.github.com/users/'+value));
+        var userListURL = 'https://api.github.com/search/users?q='+value;
+        // console.log('getUsersList(tempURL)',getUsersList(tempURL));
+        // createDropDown(getUsersList(tempURL));
+        var inputElement = '.main_search__input-field';
+        $.ajax({
+            type: 'GET',
+            url: userListURL,
+            success: function(data) {
+                createDropDown(inputElement,data);
+            },
+        }).fail(function (jqXHR, textStatus, error) {
+            // Handle error here
+            var errMessage = JSON.parse(jqXHR.responseText).message + '<br><br> Please refresh the page to continue';
+            $('.err_message').html(errMessage);
+            $('.error_message-container').fadeIn();
+        });
+    },300);
 });
 
 $("#main_search").on("keypress", function(e) {
